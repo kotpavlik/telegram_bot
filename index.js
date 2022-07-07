@@ -21,6 +21,7 @@ app.use(cors())
 app.post("/", (req, res) => {
    const body = req.body;
    if(body){
+       console.log('I GOT DATA')
        bot.sendMessage(245721044,` you are name ${body.first_name} ${body.last_name}`)
        res.send("GREAT");
    }
