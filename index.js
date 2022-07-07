@@ -2,10 +2,11 @@ const  TelegramAPI = require('node-telegram-bot-api');
 const {gameOptions,againOptions} = require('./options.js');
 // Requiring modules
 const express = require("express");
-
+const bodyParser = require("body-parser");
 var cors = require('cors');
 const app = express();
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 const token = '5594996297:AAEm8a0PqLX5I1C27F04AXXQyDLh6x-RiJM';
 
 const bot = new TelegramAPI(token,{polling:true});
@@ -22,7 +23,7 @@ app.post("/", (req, res) => {
    const body = req.body;
    if(body){
        console.log('I GOT DATA')
-       bot.sendMessage(245721044,` you are name ${body.first_name} ${body.last_name}`)
+       bot.sendMessage(245721044,` you are name ${body.first_name} ${body.email} ${body.phone_number}`)
        res.send("GREAT");
    }
 
