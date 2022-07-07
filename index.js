@@ -1,11 +1,45 @@
 const  TelegramAPI = require('node-telegram-bot-api');
 const {gameOptions,againOptions} = require('./options.js');
+// Requiring modules
+const express = require("express");
+const app = express();
 
 const token = '5594996297:AAEm8a0PqLX5I1C27F04AXXQyDLh6x-RiJM';
 
 const bot = new TelegramAPI(token,{polling:true});
 
 const chats = {}
+
+
+
+// Root route of express app
+app.post("/", (req, res) => {
+   const body = req.body;
+   if(body){
+       bot.sendMessage(245721044,` you are name ${body.first_name} ${body.last_name}`)
+       res.send("GREAT");
+   }
+
+});
+
+
+// All the general routes of your
+// web app are defined above the
+// default route
+
+// Default route
+app.get("*", (req, res) => {
+
+// Here user can also design an
+// error page and render it
+    res.send("PAGE NOT FOUND");
+});
+
+// Server setup
+app.listen(3228, () => {
+    console.log(
+        `Server listening on http://localhost:3228`);
+});
 
 
 
@@ -50,7 +84,7 @@ const start =()=> {
         if(data === "/play_again") {
             return  startGame(chatId)
         }
-        if(data === chats[chatId]){
+        if(data == chats[chatId]){
             return await bot.sendMessage(chatId,'you are winner',againOptions)
         } else {
             return await bot.sendMessage(chatId,` the bot guessed ${chats[chatId]}`,againOptions)
