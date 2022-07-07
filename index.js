@@ -2,6 +2,8 @@ const  TelegramAPI = require('node-telegram-bot-api');
 const {gameOptions,againOptions} = require('./options.js');
 // Requiring modules
 const express = require("express");
+
+var cors = require('cors');
 const app = express();
 
 const token = '5594996297:AAEm8a0PqLX5I1C27F04AXXQyDLh6x-RiJM';
@@ -11,6 +13,9 @@ const bot = new TelegramAPI(token,{polling:true});
 const chats = {}
 
 
+
+
+app.use(cors())
 
 // Root route of express app
 app.post("/", (req, res) => {
