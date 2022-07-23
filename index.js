@@ -23,7 +23,8 @@ app.post("/", (req, res) => {
    const body = req.body;
    if(body){
        console.log('I GOT DATA')
-       bot.sendMessage(245721044,` you are name ${body.first_name} ${body.email} ${body.phone_number}`)
+       bot.sendMessage(245721044,
+           `name: ${body.first_name} email:${body.email} phone:${body.phone_number} comment:${body.comments}`)
        res.send("GREAT");
    }
 
